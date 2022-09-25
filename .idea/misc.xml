@@ -4,8 +4,10 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/dariu/codefellows/Task_Master/app/src/main/res/layout/activity_add_task.xml" value="0.33" />
-        <entry key="..\:/Users/dariu/codefellows/Task_Master/app/src/main/res/layout/activity_all_task.xml" value="0.1" />
+        <entry key="..\:/Users/dariu/codefellows/Task_Master/app/src/main/res/layout/activity_all_task.xml" value="0.22" />
+        <entry key="..\:/Users/dariu/codefellows/Task_Master/app/src/main/res/layout/activity_app_settings.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/dariu/codefellows/Task_Master/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Users/dariu/codefellows/Task_Master/app/src/main/res/layout/activity_task_details.xml" value="0.2" />
       </map>
     </option>
   </component>
