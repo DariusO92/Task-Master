@@ -2,7 +2,7 @@
 <resources>
     <color name="black_blue">#0b0c10</color>
     <color name="Dark_blue">#1f2833</color>
-    <color name="greyish_blue">#c5c6c7</color>
+    <color name="grey_blue">#c5c6c7</color>
     <color name="Soft_cyan">#66fcf1</color>
     <color name="Dark_moderate_cyan">#45A29E</color>
     <color name="black">#FF000000</color>

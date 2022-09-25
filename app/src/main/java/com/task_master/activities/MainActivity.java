@@ -1,5 +1,7 @@
 package com.task_master.activities;
 
+import static com.task_master.activities.AppSettings.USER_NAME_TAG;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -9,6 +11,7 @@ import android.os.Bundle;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.preference.PreferenceManager;
 
@@ -27,13 +30,13 @@ public class MainActivity extends AppCompatActivity {
 
         goTooAddTaskBtn();
         goToAllTaskBtn();
-
+        goToAppSettingsImgButton();
     }
 
     @Override
     protected  void onResume(){
         super.onResume();
-        String userName = preferences.getString(AppSettings.USER_NAME_TAG, "No name");
+        String userName = preferences.getString(USER_NAME_TAG, "No name");
         TextView userNameDisplay = findViewById(R.id.userNameId);
         userNameDisplay.setText(userName);
     }
@@ -50,6 +53,16 @@ public class MainActivity extends AppCompatActivity {
         Button allTaskButton = MainActivity.this.findViewById(R.id.allTaskButton);
         allTaskButton.setOnClickListener(view -> {
             Intent goToAllTaskFromIntent = new Intent(MainActivity.this, AllTask.class);
+            startActivity(goToAllTaskFromIntent);
+
+        });
+    }
+
+    public void goToAppSettingsImgButton(){
+        ImageView appImage = MainActivity.this.findViewById(R.id.GoToAppSettingsButtonID);
+        appImage.setOnClickListener(view ->{
+            Intent goToAppSettingsFromIntent = new Intent(MainActivity.this, AppSettings.class);
+            startActivity(goToAppSettingsFromIntent);
         });
     }
 }

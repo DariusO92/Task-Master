@@ -20,7 +20,7 @@ public class AppSettings extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_app_settings);
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        String userName = sharedPreferences.getString(USER_NAME_TAG, "");
+        String userName = sharedPreferences.getString(USER_NAME_TAG, "userName");
         if (!userName.isEmpty()){
             EditText userNameEdited = findViewById(R.id.editTextTextPersonName);
             userNameEdited.setText(userName);
