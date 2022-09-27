@@ -3,6 +3,8 @@ package com.task_master.activities;
 import static com.task_master.activities.AppSettings.USER_NAME_TAG;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 
@@ -15,22 +17,47 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.preference.PreferenceManager;
 
+import com.task_master.Adapter.TaskRecyclerViewAdapter;
+import com.task_master.Model.TaskModel;
 import com.task_master.R;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     public static final String TASK_TITlE = "task title";
     SharedPreferences preferences;
+//    List<TaskModel> taskModelList = null;
+//    TaskRecyclerViewAdapter taskAdapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        setUpTaskRecyclerView();
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
 
         goTooAddTaskBtn();
         goToAllTaskBtn();
         goToAppSettingsImgButton();
+    }
+
+    public void setUpTaskRecyclerView(){
+        RecyclerView taskRecyclerView = findViewById(R.id.TaskRecyclerViewID);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+        taskRecyclerView.setLayoutManager(layoutManager);
+
+        List<TaskModel> tasks = new ArrayList<>();
+
+        tasks.add(new TaskModel());
+        tasks.add(new TaskModel());
+        tasks.add(new TaskModel());
+        tasks.add(new TaskModel());
+        tasks.add(new TaskModel());
+
+         TaskRecyclerViewAdapter adapter = new TaskRecyclerViewAdapter(tasks, this);
+        taskRecyclerView.setAdapter(adapter);
     }
 
     @Override

@@ -49,4 +49,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@android:drawable/btn_star"
         tools:layout_editor_absoluteY="32dp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/TaskRecyclerViewID"
+        android:layout_width="409dp"
+        android:layout_height="431dp"
+        android:layout_marginTop="89dp"
+        android:layout_marginEnd="2dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageButton" />
 </androidx.constraintlayout.widget.ConstraintLayout>
