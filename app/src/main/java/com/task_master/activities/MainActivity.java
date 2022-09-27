@@ -27,8 +27,8 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
     public static final String TASK_TITlE = "task title";
     SharedPreferences preferences;
-//    List<TaskModel> taskModelList = null;
-//    TaskRecyclerViewAdapter taskAdapter;
+
+
 
 
     @Override
@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void goToAppSettingsImgButton(){
-        ImageView appImage = MainActivity.this.findViewById(R.id.GoToAppSettingsButtonID);
+        ImageView appImage = MainActivity.this.findViewById(R.id.imageButtonid);
         appImage.setOnClickListener(view ->{
             Intent goToAppSettingsFromIntent = new Intent(MainActivity.this, AppSettings.class);
             startActivity(goToAppSettingsFromIntent);
