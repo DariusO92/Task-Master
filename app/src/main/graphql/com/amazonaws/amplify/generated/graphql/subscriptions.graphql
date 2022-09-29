@@ -26,3 +26,36 @@ subscription OnDeleteTodo {
     updatedAt
   }
 }
+subscription OnCreateTaskModel {
+  onCreateTaskModel {
+    id
+    name
+    description
+    dateCreated
+    state
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdateTaskModel {
+  onUpdateTaskModel {
+    id
+    name
+    description
+    dateCreated
+    state
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteTaskModel {
+  onDeleteTaskModel {
+    id
+    name
+    description
+    dateCreated
+    state
+    createdAt
+    updatedAt
+  }
+}
