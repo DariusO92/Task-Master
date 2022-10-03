@@ -17,9 +17,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import  com.amplifyframework.core.Amplify;
 import com.task_master.R;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 
 public class AddTask extends AppCompatActivity {
     public static  final String Tag = "AddTaskActivities";
@@ -35,17 +37,52 @@ public class AddTask extends AppCompatActivity {
         setUpSubmitButton();
         setUpTypeSpinner();
     }
+    private void setUpTeamSpinner(){
+        Amplify.API.query(
+                ModelQuery.list(Team.class),
+                success -> {
+                    Log.i(Tag, "Read team successfully");
+                    ArrayList<String> teamNames = new ArrayList<>();
+                    ArrayList<Team> teams = new ArrayList<>();
+                    for (Team team : success.getData()){
+                        teams.add(team);
+                        teamNames.add(team.getName());
+                    }
+                    teamFuture.complete(teams);
+                    runOnUiThread(() -> {
+                        teamSpinner.setAdapter(new ArrayAdapter<>(
+                                this,
+                                android.R.layout.simple_list_item,
+                                teamNames));
 
+                    });
+                },
+                failure -> {
+                    teamFuture.complete(null);
+                    Log.i(Tag, "Did not Read teams successfully");
+                }
+        );
+    }
     private void setUpTypeSpinner(){
-//        Amplify.API.query(
-//                ModelQuery.list(Team.class)
-//        )
-//        Spinner addTaskTypeSpinner = findViewById(R.id.AddTaskSpinner);
-//        addTaskTypeSpinner.setAdapter(new ArrayAdapter<>(
-//            this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, StateEnum.values()
-//        ));
+
+        Spinner addTaskTypeSpinner = findViewById(R.id.AddTaskSpinner);
+        addTaskTypeSpinner.setAdapter(new ArrayAdapter<>(
+            this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, StateEnum.values()
+        ));
     }
        private void setUpSubmitButton(){
+        String selectedTeamString = teamSpinner.getSelectedItem().toString();
+        List<Team> teams = null;
+        try{
+            teams = teamFuture.get();
+        } catch (InterruptedException ie){
+            Log.e(Tag, "Interupted Exception while getting teams");
+            Thread.currentThread().interrupt();
+        } catch (ExecutionException ee){
+            Log.e(Tag, "ExecutionException while getting teams" + ee.getMessage());
+        }
+        Team selectedTeam = teams.stream().filter(t -> t.getName().equals(selectedTeamString)).findAny().orElseThrow(RuntimeException::new);
+
         Spinner addTaskTypeSpinner = findViewById(R.id.AddTaskSpinner);
         Button saveNewTaskButton = findViewById(R.id.addTaskButtonId);
         saveNewTaskButton.setOnClickListener(view -> {
