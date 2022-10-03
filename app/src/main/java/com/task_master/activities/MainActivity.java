@@ -6,17 +6,21 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.nfc.Tag;
 import android.os.Bundle;
 
 
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.preference.PreferenceManager;
 
+import com.amplifyframework.api.graphql.model.ModelQuery;
+import com.amplifyframework.core.Amplify;
 import com.task_master.Adapter.TaskRecyclerViewAdapter;
 import com.task_master.Model.TaskModel;
 import com.task_master.R;
@@ -26,7 +30,11 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     public static final String TASK_TITlE = "task title";
+    public static final String Tag = "AddTask";
     SharedPreferences preferences;
+
+    List<TaskModel> tasks = null;
+    TaskRecyclerViewAdapter adapter;
 
 
 
@@ -37,35 +45,50 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         setUpTaskRecyclerView();
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
-
+        tasks = new ArrayList<>();
         goTooAddTaskBtn();
         goToAllTaskBtn();
         goToAppSettingsImgButton();
     }
 
-    public void setUpTaskRecyclerView(){
+    private void setUpTaskRecyclerView(){
         RecyclerView taskRecyclerView = findViewById(R.id.TaskRecyclerViewID);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         taskRecyclerView.setLayoutManager(layoutManager);
 
-        List<TaskModel> tasks = new ArrayList<>();
+//        List<TaskModel> tasks = new ArrayList<>();
+//
+//        tasks.add(new TaskModel());
+//        tasks.add(new TaskModel());
+//        tasks.add(new TaskModel());
+//        tasks.add(new TaskModel());
+//        tasks.add(new TaskModel());
 
-        tasks.add(new TaskModel());
-        tasks.add(new TaskModel());
-        tasks.add(new TaskModel());
-        tasks.add(new TaskModel());
-        tasks.add(new TaskModel());
-
-         TaskRecyclerViewAdapter adapter = new TaskRecyclerViewAdapter(tasks, this);
+         adapter = new TaskRecyclerViewAdapter(tasks, this);
         taskRecyclerView.setAdapter(adapter);
     }
 
     @Override
     protected  void onResume(){
         super.onResume();
-        String userName = preferences.getString(USER_NAME_TAG, "No name");
-        TextView userNameDisplay = findViewById(R.id.userNameId);
-        userNameDisplay.setText(userName);
+        Amplify.API.query(
+                ModelQuery.list(com.amplifyframework.datastore.generated.model.TaskModel.class),
+                successResponse -> {
+                    Log.i(Tag, "Read Tasks Successfully!");
+                    tasks.clear();
+                    for (com.amplifyframework.datastore.generated.model.TaskModel tasks : successResponse.getData()){
+                        //tasks.add(tasks);
+                    }
+                    runOnUiThread(() -> {
+                        adapter.notifyDataSetChanged();
+                    });
+                },
+                failureResponse -> Log.i(Tag, "Did not Read Task Successfully")
+        );
+
+//        String userName = preferences.getString(USER_NAME_TAG, "No name");
+//        TextView userNameDisplay = findViewById(R.id.userNameId);
+//        userNameDisplay.setText(userName);
     }
     public void goTooAddTaskBtn(){
         Button addTaskButton = MainActivity .this.findViewById(R.id.addTaskButton);
