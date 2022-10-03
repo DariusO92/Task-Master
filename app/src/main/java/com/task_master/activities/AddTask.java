@@ -8,6 +8,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import com.amplifyframework.api.graphql.model.ModelMutation;
+import com.amplifyframework.api.graphql.model.ModelQuery;
+import com.amplifyframework.core.model.Model;
 import com.amplifyframework.core.model.temporal.Temporal;
 import com.amplifyframework.datastore.generated.model.*;
 
@@ -16,9 +18,14 @@ import  com.amplifyframework.core.Amplify;
 import com.task_master.R;
 
 import java.util.Date;
+import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 public class AddTask extends AppCompatActivity {
     public static  final String Tag = "AddTaskActivities";
+
+    Spinner teamSpinner = null;
+    CompletableFuture<List<Team>> teamFuture = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -30,10 +37,13 @@ public class AddTask extends AppCompatActivity {
     }
 
     private void setUpTypeSpinner(){
-        Spinner addTaskTypeSpinner = findViewById(R.id.AddTaskSpinner);
-        addTaskTypeSpinner.setAdapter(new ArrayAdapter<>(
-            this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, StateEnum.values()
-        ));
+//        Amplify.API.query(
+//                ModelQuery.list(Team.class)
+//        )
+//        Spinner addTaskTypeSpinner = findViewById(R.id.AddTaskSpinner);
+//        addTaskTypeSpinner.setAdapter(new ArrayAdapter<>(
+//            this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, StateEnum.values()
+//        ));
     }
        private void setUpSubmitButton(){
         Spinner addTaskTypeSpinner = findViewById(R.id.AddTaskSpinner);

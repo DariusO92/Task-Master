@@ -11,11 +11,22 @@ type Todo @model {
 type TaskModel @model @auth(rules: [{allow: public}]){
     id: ID!
     name: String!
+    teamID: ID! @index(name: "byTeam")
     description: String
     dateCreated: AWSDateTime
     state: StateEnum
+    team: Team @belongsTo(fields: ["teamID"])
 
 }
+type Team @model @auth(rules: [{allow: public}]){
+    id: ID!
+    name: String!
+    addTask: [TaskModel] @hasMany(indexName: "byTeam", fields: ["id"])
+}
+
+
+
+
  enum StateEnum{
  New
  Assigned
