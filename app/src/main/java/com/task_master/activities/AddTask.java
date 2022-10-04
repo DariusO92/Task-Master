@@ -33,6 +33,7 @@ public class AddTask extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_task);
+        teamFuture = new CompletableFuture<>();
 
         setUpSubmitButton();
         setUpTypeSpinner();
@@ -52,7 +53,7 @@ public class AddTask extends AppCompatActivity {
                     runOnUiThread(() -> {
                         teamSpinner.setAdapter(new ArrayAdapter<>(
                                 this,
-                                android.R.layout.simple_list_item,
+                                android.R.layout.simple_spinner_item,
                                 teamNames));
 
                     });

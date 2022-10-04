@@ -28,9 +28,19 @@ query GetTaskModel($id: ID!) {
   getTaskModel(id: $id) {
     id
     name
+    teamID
     description
     dateCreated
     state
+    team {
+      id
+      name
+      addTask {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
     createdAt
     updatedAt
   }
@@ -44,9 +54,55 @@ query ListTaskModels(
     items {
       id
       name
+      teamID
       description
       dateCreated
       state
+      team {
+        id
+        name
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
+query GetTeam($id: ID!) {
+  getTeam(id: $id) {
+    id
+    name
+    addTask {
+      items {
+        id
+        name
+        teamID
+        description
+        dateCreated
+        state
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+query ListTeams(
+  $filter: ModelTeamFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listTeams(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      name
+      addTask {
+        nextToken
+      }
       createdAt
       updatedAt
     }
