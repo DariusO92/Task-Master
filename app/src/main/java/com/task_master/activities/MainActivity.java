@@ -20,6 +20,8 @@ import android.widget.TextView;
 import android.preference.PreferenceManager;
 
 import com.amplifyframework.api.graphql.model.ModelQuery;
+import com.amplifyframework.auth.AuthUserAttributeKey;
+import com.amplifyframework.auth.options.AuthSignUpOptions;
 import com.amplifyframework.core.Amplify;
 import com.task_master.Adapter.TaskRecyclerViewAdapter;
 import com.task_master.Model.TaskModel;
@@ -44,8 +46,49 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setUpTaskRecyclerView();
+
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
         tasks = new ArrayList<>();
+        Amplify.Auth.fetchAuthSession(
+                result -> Log.i("AmplifyQuickstart", result.toString()),
+                error -> Log.e("AmplifyQuickstart", error.toString())
+        );
+        Amplify.Auth.signUp("darius.owens.j@gmail.com",
+                "p@ssw0rd", AuthSignUpOptions.builder()
+                        .userAttribute(AuthUserAttributeKey.email(),"darius.owens.j@gmail.com")
+                        .userAttribute(AuthUserAttributeKey.nickname(),"BigO")
+                        .build(),
+        success -> Log.i(Tag, "Signup success!" + success),
+        failure -> Log.i(Tag, "Signup failed with username" + "darius.owens.j@gmail.com" + "with message: " + failure)
+                    );
+
+        Amplify.Auth.confirmSignUp("darius.owens.j@gmail.com", "147600",
+                success -> Log.i(Tag, "Verification succeeded: " + success),
+                failure -> Log.i(Tag, "Verification Failed: " + failure)
+                    );
+
+        Amplify.Auth.signIn("darius.owens.j@gmail.com",
+                       "p@ssw0rd",
+                    success -> Log.i(Tag, "Login succeeded: " + success.toString()),
+                    failure -> Log.i(Tag, "Login failed: " + failure.toString())
+                    );
+        Amplify.Auth.fetchAuthSession(
+                result -> Log.i("AmplifyQuickstart", result.toString()),
+                error -> Log.e("AmplifyQuickstart", error.toString())
+        );
+
+
+        Amplify.Auth.signOut(
+                () ->
+                {
+                    Log.i(Tag, "Logout succeeded!");
+                },
+                failure ->
+                {
+                    Log.i(Tag, "Logout failed: " + failure.toString());
+                }
+        );
+
         goTooAddTaskBtn();
         goToAllTaskBtn();
         goToAppSettingsImgButton();
