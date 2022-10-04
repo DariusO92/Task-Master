@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
 
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
         tasks = new ArrayList<>();
-        Amplify.Auth.fetchAuthSession(
+        /*Amplify.Auth.fetchAuthSession(
                 result -> Log.i("AmplifyQuickstart", result.toString()),
                 error -> Log.e("AmplifyQuickstart", error.toString())
         );
@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
                 {
                     Log.i(Tag, "Logout failed: " + failure.toString());
                 }
-        );
+        );*/
 
         goTooAddTaskBtn();
         goToAllTaskBtn();
