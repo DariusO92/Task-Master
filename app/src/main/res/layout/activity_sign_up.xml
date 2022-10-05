@@ -20,8 +20,8 @@
 
     <EditText
         android:id="@+id/signupEmailId"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="229dp"
+        android:layout_height="65dp"
         android:layout_marginStart="76dp"
         android:layout_marginTop="90dp"
         android:layout_marginEnd="126dp"
@@ -36,8 +36,8 @@
 
     <EditText
         android:id="@+id/signupUserNameId"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="229dp"
+        android:layout_height="63dp"
         android:layout_marginStart="71dp"
         android:layout_marginTop="59dp"
         android:layout_marginEnd="130dp"
@@ -52,8 +52,8 @@
 
     <EditText
         android:id="@+id/signupPasswodId"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="239dp"
+        android:layout_height="59dp"
         android:layout_marginStart="83dp"
         android:layout_marginEnd="118dp"
         android:ems="10"
