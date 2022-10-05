@@ -6,4 +6,64 @@
     android:layout_height="match_parent"
     tools:context=".activities.LoginActivity">
 
+    <EditText
+        android:id="@+id/LoginEmailId"
+        android:layout_width="225dp"
+        android:layout_height="76dp"
+        android:layout_marginStart="76dp"
+        android:layout_marginEnd="125dp"
+        android:layout_marginBottom="2dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Email"
+        app:layout_constraintBottom_toTopOf="@+id/LoginbuttonId"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/LoginbuttonId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="77dp"
+        android:layout_marginTop="13dp"
+        android:layout_marginEnd="247dp"
+        android:layout_marginBottom="40dp"
+        android:text="Login"
+        app:layout_constraintBottom_toTopOf="@+id/textView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/LoginEmailId" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="83dp"
+        android:layout_height="37dp"
+        android:layout_marginStart="75dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="253dp"
+        android:layout_marginBottom="22dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toTopOf="@+id/LoginPasswordEditText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/LoginbuttonId" />
+
+    <EditText
+        android:id="@+id/LoginPasswordEditText"
+        android:layout_width="273dp"
+        android:layout_height="112dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="149dp"
+        android:layout_marginBottom="241dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 </androidx.constraintlayout.widget.ConstraintLayout>

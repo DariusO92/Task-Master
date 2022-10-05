@@ -14,12 +14,14 @@ import android.os.Bundle;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.preference.PreferenceManager;
 
 import com.amplifyframework.api.graphql.model.ModelQuery;
+import com.amplifyframework.auth.AuthUser;
 import com.amplifyframework.auth.AuthUserAttributeKey;
 import com.amplifyframework.auth.options.AuthSignUpOptions;
 import com.amplifyframework.core.Amplify;
@@ -34,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
     public static final String TASK_TITlE = "task title";
     public static final String Tag = "AddTask";
     SharedPreferences preferences;
+    public AuthUser currentUser = null;
 
     List<TaskModel> tasks = null;
     TaskRecyclerViewAdapter adapter;
@@ -46,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setUpTaskRecyclerView();
+        currentUser = Amplify.Auth.getCurrentUser();
 
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
         tasks = new ArrayList<>();
@@ -132,6 +136,27 @@ public class MainActivity extends AppCompatActivity {
 //        String userName = preferences.getString(USER_NAME_TAG, "No name");
 //        TextView userNameDisplay = findViewById(R.id.userNameId);
 //        userNameDisplay.setText(userName);
+    }
+
+    private void setUpLoginSignUpButton(){
+        Button loginButton = findViewById(R.id.MainLoginButtonId);
+        Button signupButton = findViewById(R.id.MainSigUpButtonId);
+
+        if (currentUser == null){
+            loginButton.setVisibility(View.VISIBLE);
+            signupButton.setVisibility(View.VISIBLE);
+        } else {
+            loginButton.setVisibility(View.INVISIBLE);
+            signupButton.setVisibility(View.INVISIBLE);
+        }
+        loginButton.setOnClickListener(view -> {
+            Intent goToLoginActivity = new Intent(MainActivity.this, LoginActivity.class);
+            startActivity(goToLoginActivity);
+        });
+        signupButton.setOnClickListener(view -> {
+            Intent goToSignUpActivity = new Intent(MainActivity.this, SignUpActivity.class);
+            startActivity(goToSignUpActivity);
+        });
     }
     public void goTooAddTaskBtn(){
         Button addTaskButton = MainActivity .this.findViewById(R.id.addTaskButton);
