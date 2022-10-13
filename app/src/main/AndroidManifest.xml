@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.task_master">
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:name=".activities.TaskMasterAmplifyApplication"
@@ -15,7 +17,7 @@
         android:theme="@style/Theme.Task_Master"
         tools:targetApi="31">
         <activity
-            android:name=".TaskImage"
+            android:name=".activities.TaskImage"
             android:exported="false" />
         <activity
             android:name=".activities.VerifyActivity"
