@@ -37,6 +37,7 @@ public class AddTask extends AppCompatActivity {
 
         setUpSubmitButton();
         setUpTypeSpinner();
+        setUpTeamSpinner();
     }
     private void setUpTeamSpinner(){
         Amplify.API.query(

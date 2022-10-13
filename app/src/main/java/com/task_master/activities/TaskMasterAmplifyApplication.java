@@ -6,8 +6,9 @@ import android.util.Log;
 
 import com.amplifyframework.AmplifyException;
 import com.amplifyframework.api.aws.AWSApiPlugin;
-import com.amplifyframework.auth.cognito.AWSCognitoAuthPlugin;
+//import com.amplifyframework.auth.cognito.AWSCognitoAuthPlugin;
 import com.amplifyframework.core.Amplify;
+import com.amplifyframework.storage.s3.AWSS3StoragePlugin;
 
 public class TaskMasterAmplifyApplication extends Application {
     public static final String Tag ="TaskMasterApplication";
@@ -18,7 +19,8 @@ public class TaskMasterAmplifyApplication extends Application {
         super.onCreate();
         try{
             Amplify.addPlugin(new AWSApiPlugin());
-            Amplify.addPlugin(new AWSCognitoAuthPlugin());
+            Amplify.addPlugin(new AWSS3StoragePlugin());
+           // Amplify.addPlugin(new AWSCognitoAuthPlugin());
             Amplify.configure(getApplicationContext());
         } catch (AmplifyException ae){
             Log.e(Tag,"Error initializing Amplify: " + ae.getMessage(), ae);
