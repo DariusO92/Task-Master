@@ -19,6 +19,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.preference.PreferenceManager;
+import com.amplifyframework.datastore.generated.model.TaskModel;
 
 import com.amplifyframework.api.graphql.model.ModelQuery;
 import com.amplifyframework.auth.AuthUser;
@@ -26,15 +27,19 @@ import com.amplifyframework.auth.AuthUserAttributeKey;
 import com.amplifyframework.auth.options.AuthSignUpOptions;
 import com.amplifyframework.core.Amplify;
 import com.task_master.Adapter.TaskRecyclerViewAdapter;
-import com.task_master.Model.TaskModel;
+//import com.task_master.Model.TaskModel;
 import com.task_master.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    public static final String TASK_TITlE = "task title";
+    public static final String TASK_NAME = "task Name";
+    public static final String TASK_DESCRIPTION = "task Description";
+    public static final String TASK_STATE = "task state";
+    public static final String Task_ID = "task id";
     public static final String Tag = "AddTask";
+    public static final String MainActivity_Tag = "MainActivity";
     SharedPreferences preferences;
     public AuthUser currentUser = null;
 
@@ -96,6 +101,7 @@ public class MainActivity extends AppCompatActivity {
         goTooAddTaskBtn();
         goToAllTaskBtn();
         goToAppSettingsImgButton();
+        setUpLoginSignUpButton();
     }
 
     private void setUpTaskRecyclerView(){
@@ -139,15 +145,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setUpLoginSignUpButton(){
+        String preferredUserName ="";
         Button loginButton = findViewById(R.id.MainLoginButtonId);
         Button signupButton = findViewById(R.id.MainSigUpButtonId);
 
         if (currentUser == null){
             loginButton.setVisibility(View.VISIBLE);
-            signupButton.setVisibility(View.VISIBLE);
-        } else {
-            loginButton.setVisibility(View.INVISIBLE);
             signupButton.setVisibility(View.INVISIBLE);
+        } else {
+            Log.i(MainActivity_Tag,"oncreate: Username: " + preferredUserName);
+            loginButton.setVisibility(View.INVISIBLE);
+            signupButton.setVisibility(View.VISIBLE);
         }
         loginButton.setOnClickListener(view -> {
             Intent goToLoginActivity = new Intent(MainActivity.this, LoginActivity.class);
